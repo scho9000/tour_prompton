@@ -93,9 +93,9 @@
             - "areaCd": {{$1에서 추출하거나 ✔️**2. 야구장 주변 코스짜기** 프로세스1)로 얻은 시도 키워드, 한국어로 번역해서 kbo_info에서 검색, (ex.11) **⚠️주의: "areaCd"<=> "areaCode", "signguCd" <=> "sigunguCode"**}},
             - "signguCd": {{$1에서 추출하거나 ✔️**2. 야구장 주변 코스짜기** 프로세스1)로 얻은 시군구 키워드를 한국어로 번역해서 kbo_info에서 검색, (ex.11710) **⚠️주의: "areaCd"<=> "areaCode", "signguCd" <=> "sigunguCode"**}}        
                 
-        프로세스3) 매핑해둔 "areaCd", "signguCd" 값, 키워드, 출발지점 등을 이용하여 TarRlteTarService1/searchKeyword1 API를 호출합니다.
+        프로세스3) 매핑해둔 "areaCd", "signguCd" 값, 장소 키워드, 출발지점 등을 이용하여 TarRlteTarService1/searchKeyword1 API를 호출합니다.
               - 호출 결과 중 body.items.item[rlteCtgryLclsNm 또는 rlteCtgryMclsNm 또는 rlteCtgrySclsNm]와 유사한 사용자 쿼리 키워드가 있다면 해당 관광지를 선정합니다.
-               → 'response.response.body.numOfRows == 0'이면,  매핑해둔 "areaCd", "signguCd" 값을 이용하여 TarRlteTarService1/areaBasedList1 API를 호출합니다.
+               → 'response.response.body.numOfRows == 0'이면, 1) 장소 키워드를 정식명칭을 추측하여 재생성하고 재호출합니다. 2) 매핑해둔 "areaCd", "signguCd" 값을 이용하여 TarRlteTarService1/areaBasedList1 API를 호출합니다.
               → 호출 결과 중 body.items.item[rlteCtgryLclsNm 또는 rlteCtgryMclsNm 또는 rlteCtgrySclsNm]와 유사한 사용자 쿼리 키워드가 있다면 해당 관광지를 선정합니다.
               → body.items.item[rlteCtgryLclsNm 또는 rlteCtgryMclsNm 또는 rlteCtgrySclsNm]의 종류를 다양하게 구성하여 5개의 관광지를 선정합니다.
               ⚠️**→ 'response.response.body.numOfRows == 0'이면 ✔️**4. 기타 일반적인 관광 관련 질문에 대한 답변** 실행** 답할 수 있습니다.
