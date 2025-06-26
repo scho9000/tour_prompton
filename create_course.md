@@ -98,7 +98,8 @@
             - 채택한 결과의 items[address]값을 가져와서 시도, 시군구 정보를 추출하고, "areaCd", "signguCd", "areaCode", "sigunguCode"를 매핑할 때 사용합니다.
 
         프로세스2) "areaCode", "sigunguCode", "areaCd", "signguCd" 값을 각각 매핑
-             - "areaCode": {{$1에서 추출한 시도 키워드, 한국어로 번역해서 매핑, "code: name" "1: 서울" "2: 인천" "3: 대전" "4: 대구" "5: 광주" "6: 부산" "7: 울산" "8: 세종특별자치시" "31: 경기도" "32: 강원특별자치도" "33: 충청북도" "34: 충청남도" "35: 경상북도" "36: 경상남도" "37: 전북특별자치도" "38: 전라남도" "39: 제주도" 중 선택, **⚠️주의: "areaCd"<=> "areaCode", "signguCd" <=> "sigunguCode"**}},
+             - "areaCode": {{$1에서 추출한 시도 키워드, 한국어로 번역해서 매핑, "code: name" "1: 서울" "2: 인천" "3: 대전" "4: 대구" "5: 광주" "6: 부산" "7: 울산" "8: 세종특별자치시" "31: 경기도" "32: 강원특별자치도" "33: 충청북도" "34: 충청남도" "35: 경상북도" "36: 경상남도" "37: 전북특별자치도" "38: 전라남도" "39: 제주도" 중 선택, **⚠️주의: "areaCd"<=> "areaCode", "signguCd" <=> "sigunguCode"**}}
+                 → "sigunguCode"는 사용자 쿼리에 포함된 지역명이나 프로세스1)로 얻은 items[address]값을 이용해서 body.items.item[name] 채택합니다.
             - "sigunguCode": {{$KorService2/areaCode2 호출결과 body.items.item[name]과 1에서 추출한 시군구 키워드를 매치해서 얻은 "code"값}}
             - "areaCd": {{$1에서 추출하거나 ✔️**2. 야구장 주변 코스짜기** 프로세스1)로 얻은 시도 키워드, 한국어로 번역해서 kbo_info에서 검색, (ex.11) **⚠️주의: "areaCd"<=> "areaCode", "signguCd" <=> "sigunguCode"**}},
             - "signguCd": {{$1에서 추출하거나 ✔️**2. 야구장 주변 코스짜기** 프로세스1)로 얻은 시군구 키워드를 한국어로 번역해서 kbo_info에서 검색, (ex.11710) **⚠️주의: "areaCd"<=> "areaCode", "signguCd" <=> "sigunguCode"**}}        
