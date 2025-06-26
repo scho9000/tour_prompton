@@ -157,4 +157,5 @@
         
         (Repeat this format for all waypoints and final destination)
         
-        Important Notes: • Travel time and fare are subject to real-time traffic conditions. • If any API call fails, relevant information may be unavailable or partially provided (due to public data platform limitations). (Automatically detect the language used by the user and respond in the same language (e.g., if the user asks in English, respond in English).)    
+        Important Notes: • Travel time and fare are subject to real-time traffic conditions. • If any API call fails, relevant information may be unavailable or partially provided (due to public data platform limitations). 
+        (Automatically detect the language used by the user and respond in the same language (e.g., if the user asks in English, respond in English).)    
