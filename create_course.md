@@ -25,52 +25,7 @@
     ```json
     {
         "areaCode": {{$1에서 추출한 시도 키워드, 한국어가 아니라면 [다국어 입력 처리 – 번역 기반 지역 코드 매핑 프로세스]에 따라 한국어로 번역해서 매핑, "code: name" "1: 서울" "2: 인천" "3: 대전" "4: 대구" "5: 광주" "6: 부산" "7: 울산" "8: 세종특별자치시" "31: 경기도" "32: 강원특별자치도" "33: 충청북도" "34: 충청남도" "35: 경상북도" "36: 경상남도" "37: 전북특별자치도" "38: 전라남도" "39: 제주도" 중 선택, **⚠️주의: "areaCd"<=> "areaCode", "signguCd" <=> "sigunguCode"**}},
-        "keyword": {{$1에서 추출한 장소 키워드, 한국어로 번역해서 매핑}}
-    }```
-
-4) [한국관광공사 국문 관광정보 서비스 행사정보 조회] API
-    - 명칭: KorService2/searchFestival2
-    ```json
-    {
-        "areaCode": {{$1에서 추출한 시도 키워드, 한국어가 아니라면 [다국어 입력 처리 – 번역 기반 지역 코드 매핑 프로세스]에 따라 한국어로 번역해서 매핑, "code: name" "1: 서울" "2: 인천" "3: 대전" "4: 대구" "5: 광주" "6: 부산" "7: 울산" "8: 세종특별자치시" "31: 경기도" "32: 강원특별자치도" "33: 충청북도" "34: 충청남도" "35: 경상북도" "36: 경상남도" "37: 전북특별자치도" "38: 전라남도" "39: 제주도" 중 선택, **⚠️주의: "areaCd"<=> "areaCode", "signguCd" <=> "sigunguCode"**}},
-        "sigunguCode": {{$KorService2/areaCode2 호출결과 body.items.item[name]과 1에서 추출한 시군구 키워드를 매치해서 얻은 "code"값}},
-        "eventStartDate": {{$search/local을 "q":"오늘 날짜"로 호출해서 얻은 "lastBuildDate"값을 YYYYMMDD 형식으로 변환한 값}},
-        "eventEndDate": {{$"eventStartDate"에 30일을 더한 값}}
-    }```
-    
-5) [한국관광공사_관광지별 연관 관광지 정보 지역별] API
-    - 명칭: TarRlteTarService1/areaBasedList1
-    ```json
-    {
-        "areaCd": {{$1에서 추출하거나 ✔️**2. 야구장 주변 코스짜기** 프로세스1)로 얻은 시도 키워드, 한국어로 번역해서 kbo_info에서 검색, (ex.11) **⚠️주의: "areaCd"<=> "areaCode", "signguCd" <=> "sigunguCode"**}},
-        "signguCd": {{$1에서 추출하거나 ✔️**2. 야구장 주변 코스짜기** 프로세스1)로 얻은 시군구 키워드를 한국어로 번역해서 kbo_info에서 검색, (ex.11710) **⚠️주의: "areaCd"<=> "areaCode", "signguCd" <=> "sigunguCode"**}}
-    }```
-    
-6) [한국관광공사_관광지별 연관 관광지 정보 키워드검색] API
-    - 명칭: TarRlteTarService1/searchKeyword1
-    ```json
-    {
-        "areaCd": {{$1에서 추출하거나 ✔️**2. 야구장 주변 코스짜기** 프로세스1)로 얻은 시도 키워드, 한국어로 번역해서 kbo_info에서 검색, (ex.11) **⚠️주의: "areaCd"<=> "areaCode", "signguCd" <=> "sigunguCode"**}},
-        "signguCd": {{$1에서 추출하거나 ✔️**2. 야구장 주변 코스짜기** 프로세스1)로 얻은 시군구 키워드를 한국어로 번역해서 kbo_info에서 검색, (ex.11710) **⚠️주의: "areaCd"<=> "areaCode", "signguCd" <=> "sigunguCode"**}}.
-        "keyword": {{$1에서 추출한 장소 키워드, 한국어로 번역해서 매핑}}
-    }```
-
-7) [구글 - 검색] API
-    - 명칭: customsearch/v1
-    ```json
-    {
-        "q": {{$검색할 키워드}}
-    }```
-    
-8) [네이버 - 길찾기] API 
-    - 명칭: map-direction/v1/driving
-    ```json
-    {
-        "goal": {{$search/local.json을 호출하여 얻은 도착지의 "mapx","mapy"값 (ex.129.075986,35.179470)}},
-        "start": {{$search/local.json을 호출하여 얻은 출발지의 "mapx","mapy"값 (ex.129.075986,35.179470)}}
-    }``` 
-
-### 2. 아래 프로세스를 참고해서 답변해주세요:
+        "keyword": {{$1고 답변해주세요:
     프로세스1) 장소의 x, y좌표, 주소 얻기 
           - 지역명+"야구장", 구단명 혹은 별칭(ex. 고척돔(Gocheok Dome), 쓱(SSG))이 있으면, kbo_info에서 x,y좌표, 주소, "areaCd", "signguCd", "areaCode", "sigunguCode"를 검색합니다.
              지역명+"야구장", 구단명이 없으면, 추출한 장소키워드로 바탕으로 search/local.json를 호출합니다.
@@ -86,7 +41,7 @@
             - map-direction/v1/driving API를 실행할 때, "goal", "start" 파라미터에 장소별 "items[mapx]%items[mapy]"값을 매핑하여 호출에 사용합니다.
             - 채택한 결과의 items[address]값을 가져와서 시도, 시군구 정보를 추출하고, "areaCd", "signguCd", "areaCode", "sigunguCode"를 매핑할 때 사용합니다.
 
-        프로세스2) "areaCode", "sigunguCode", "areaCd", "signguCd" 값을 각각 매핑
+        프로세스2) 아래 순서로 "areaCode", "sigunguCode", "areaCd", "signguCd" 값을 각각 매핑합니다.
              - "areaCode": {{$1에서 추출한 시도 키워드, 한국어로 번역해서 매핑, "code: name" "1: 서울" "2: 인천" "3: 대전" "4: 대구" "5: 광주" "6: 부산" "7: 울산" "8: 세종특별자치시" "31: 경기도" "32: 강원특별자치도" "33: 충청북도" "34: 충청남도" "35: 경상북도" "36: 경상남도" "37: 전북특별자치도" "38: 전라남도" "39: 제주도" 중 선택, **⚠️주의: "areaCd"<=> "areaCode", "signguCd" <=> "sigunguCode"**}}
                  → "sigunguCode"는 사용자 쿼리에 포함된 지역명이나 프로세스1)로 얻은 items[address]값을 이용해서 body.items.item[name] 채택합니다.
             - "sigunguCode": {{$KorService2/areaCode2 호출결과 body.items.item[name]과 1에서 추출한 시군구 키워드를 매치해서 얻은 "code"값}}
