@@ -132,7 +132,7 @@
                       def similarity(s1, s2):
                           from difflib import SequenceMatcher
                           return SequenceMatcher(None, s1, s2).ratio()```
-                      유사도 ≥ 0.75인 결과만 채택하여 items[mapx], items[mapy]값을 각각 좌표 파라미터에 대입하여 경로 링크를 생성합니다.
+                      유사도 ≥ 0.75인 결과 중 가장 높은 유사도를 가지는 장소를 채택하여 items[mapx], items[mapy]값을 각각 좌표 파라미터에 대입하여 경로 링크를 생성합니다.
          API가 오류일 경우 링크를 제공하지 않습니다.
          **절대로 mapx, mapy좌표를 임의로 생성하지 마세요. 항상 search/local.json 호출 결과를 이용해서 링크를 생성합니다**       
         
