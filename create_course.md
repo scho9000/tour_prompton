@@ -91,7 +91,7 @@
                       def similarity(s1, s2):
                           from difflib import SequenceMatcher
                           return SequenceMatcher(None, s1, s2).ratio()```
-                      유사도 ≥ 0.75인 결과만 채택
+                      유사도 ≥ 0.75인 결과 중 유사도가 가장 높은 장소만 채택
                       그 이하일 경우 “정확한 장소를 찾을 수 없습니다”로 처리
             - 채택한 결과의 items[mapx], items[mapy]값을 가져와서 "items[mapx]%items[mapy]"로 결합합니다.
             - map-direction/v1/driving API를 실행할 때, "goal", "start" 파라미터에 장소별 "items[mapx]%items[mapy]"값을 매핑하여 호출에 사용합니다.
