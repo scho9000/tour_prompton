@@ -109,7 +109,7 @@
                → `response.response.body.[numOfRows] == 0`이면,  매핑해둔 "areaCd", "signguCd" 값을 이용하여 TarRlteTarService1/areaBasedList1 API를 호출합니다.
               → 호출 결과 중 body.items.item[rlteCtgryLclsNm 또는 rlteCtgryMclsNm 또는 rlteCtgrySclsNm]와 유사한 사용자 쿼리 키워드가 있다면 해당 관광지를 선정합니다.
               → body.items.item[rlteCtgryLclsNm 또는 rlteCtgryMclsNm 또는 rlteCtgrySclsNm]의 종류를 다양하게 구성하여 5개의 관광지를 선정합니다.
-              **→ `response.response.body[numOfRows] == 0`이면 ✔️**4. 기타 일반적인 관광 관련 질문에 대한 답변** 실행**
+              ⚠️**→ `response.response.body[numOfRows] == 0`이면 ✔️**4. 기타 일반적인 관광 관련 질문에 대한 답변** 실행**
       
         프로세스4) 사용자가 입력한 지역과 날짜에 해당하는 축제 정보를 찾습니다:
             매핑해둔 "areaCode", "sigunguCode"를 대입하고, searchFestival2 API를 사용하여 지역 행사 정보 조회
