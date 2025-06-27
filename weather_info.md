@@ -25,7 +25,7 @@
     
     출력 응답 문장에는 stadium 이름이 하드코딩되어 있어선 안 됩니다.  
     모든 구장 정보는 문서 폴더 상의 kbo_stadium_info.csv에서 반드시 매핑된 값을 출력하십시오. 
-    예: f"{stadium}의 날씨 정보는 다음과 같습니다:
+    - 예: f"{stadium}의 날씨 정보는 다음과 같습니다:
         
     # 입력 문장에 "야구장"이라는 키워드만 포함되어 있을 경우
     if "야구장" in user_input and not contains_location(user_input):
