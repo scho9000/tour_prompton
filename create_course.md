@@ -86,21 +86,21 @@
             - map-direction/v1/driving API를 실행할 때, "goal", "start" 파라미터에 장소별 "items[mapx]%items[mapy]"값을 매핑하여 호출에 사용합니다.
             - 채택한 결과의 items[address]값을 가져와서 시도, 시군구 정보를 추출하고, "areaCd", "signguCd", "areaCode", "sigunguCode"를 매핑할 때 사용합니다.
 
-        프로세스2) 아래 순서로 "areaCode", "sigunguCode", "areaCd", "signguCd" 값을 각각 매핑합니다.
-             - "areaCode": {{$1에서 추출한 시도 키워드, 한국어로 번역해서 매핑, "code: name" "1: 서울" "2: 인천" "3: 대전" "4: 대구" "5: 광주" "6: 부산" "7: 울산" "8: 세종특별자치시" "31: 경기도" "32: 강원특별자치도" "33: 충청북도" "34: 충청남도" "35: 경상북도" "36: 경상남도" "37: 전북특별자치도" "38: 전라남도" "39: 제주도" 중 선택, **⚠️주의: "areaCd"<=> "areaCode", "signguCd" <=> "sigunguCode"**}}
+    프로세스2) 아래 순서로 "areaCode", "sigunguCode", "areaCd", "signguCd" 값을 각각 매핑합니다.
+            - "areaCode": {{$1에서 추출한 시도 키워드, 한국어로 번역해서 매핑, "code: name" "1: 서울" "2: 인천" "3: 대전" "4: 대구" "5: 광주" "6: 부산" "7: 울산" "8: 세종특별자치시" "31: 경기도" "32: 강원특별자치도" "33: 충청북도" "34: 충청남도" "35: 경상북도" "36: 경상남도" "37: 전북특별자치도" "38: 전라남도" "39: 제주도" 중 선택, **⚠️주의: "areaCd"<=> "areaCode", "signguCd" <=> "sigunguCode"**}}
                  → "sigunguCode"는 사용자 쿼리에 포함된 지역명이나 프로세스1)로 얻은 items[address]값을 이용해서 body.items.item[name] 채택합니다.
             - "sigunguCode": {{$KorService2/areaCode2 호출결과 body.items.item[name]과 1에서 추출한 시군구 키워드를 매치해서 얻은 "code"값}}
             - "areaCd": {{$1에서 추출하거나 ✔️**2. 야구장 주변 코스짜기** 프로세스1)로 얻은 시도 키워드, 한국어로 번역해서 kbo_info에서 검색, (ex.11) **⚠️주의: "areaCd"<=> "areaCode", "signguCd" <=> "sigunguCode"**}},
             - "signguCd": {{$1에서 추출하거나 ✔️**2. 야구장 주변 코스짜기** 프로세스1)로 얻은 시군구 키워드를 한국어로 번역해서 kbo_info에서 검색, (ex.11710) **⚠️주의: "areaCd"<=> "areaCode", "signguCd" <=> "sigunguCode"**}}        
                 
-        프로세스3) 매핑해둔 "areaCd", "signguCd" 값, 장소 키워드, 출발지점 등을 이용하여 TarRlteTarService1/searchKeyword1 API를 호출합니다.
-              - 호출 결과 중 body.items.item[rlteCtgryLclsNm 또는 rlteCtgryMclsNm 또는 rlteCtgrySclsNm]와 유사한 사용자 쿼리 키워드가 있다면 해당 관광지를 선정합니다.
-               → 'response.response.body.numOfRows == 0'이면, 1) 장소 키워드를 정식명칭을 추측하여 재생성하고 재호출합니다. 2) 매핑해둔 "areaCd", "signguCd" 값을 이용하여 TarRlteTarService1/areaBasedList1 API를 호출합니다.
-              → 호출 결과 중 body.items.item[rlteCtgryLclsNm 또는 rlteCtgryMclsNm 또는 rlteCtgrySclsNm]와 유사한 사용자 쿼리 키워드가 있다면 해당 관광지를 선정합니다.
-              → body.items.item[rlteCtgryLclsNm 또는 rlteCtgryMclsNm 또는 rlteCtgrySclsNm]의 종류를 다양하게 구성하여 5개의 관광지를 선정합니다.
-              ⚠️**→ 'response.response.body.numOfRows == 0'이면 ✔️**4. 기타 일반적인 관광 관련 질문에 대한 답변** 실행** 답할 수 있습니다.
+    프로세스3) 매핑해둔 "areaCd", "signguCd" 값, 장소 키워드, 출발지점 등을 이용하여 TarRlteTarService1/searchKeyword1 API를 호출합니다.
+            - 호출 결과 중 body.items.item[rlteCtgryLclsNm 또는 rlteCtgryMclsNm 또는 rlteCtgrySclsNm]와 유사한 사용자 쿼리 키워드가 있다면 해당 관광지를 선정합니다.
+            → 'response.response.body.numOfRows == 0'이면, 1) 장소 키워드를 정식명칭을 추측하여 재생성하고 재호출합니다. 2) 매핑해둔 "areaCd", "signguCd" 값을 이용하여 TarRlteTarService1/areaBasedList1 API를 호출합니다.
+            → 호출 결과 중 body.items.item[rlteCtgryLclsNm 또는 rlteCtgryMclsNm 또는 rlteCtgrySclsNm]와 유사한 사용자 쿼리 키워드가 있다면 해당 관광지를 선정합니다.
+            → body.items.item[rlteCtgryLclsNm 또는 rlteCtgryMclsNm 또는 rlteCtgrySclsNm]의 종류를 다양하게 구성하여 5개의 관광지를 선정합니다.
+            ⚠️**→ 'response.response.body.numOfRows == 0'이면 ✔️**4. 기타 일반적인 관광 관련 질문에 대한 답변** 실행** 답할 수 있습니다.
 
-        프로세스4) 관광지 날씨에 따라 코스를 추천합니다:
+    프로세스4) 관광지 날씨에 따라 코스를 추천합니다:
             📌 입력 파싱
             - 사용자 질의에서 희망 지역 추출 (예: 종로, 부산 해운대, 야구장 인근 등)
             - '야구장', 구단명, 지역명 등 포함 시 → 구장 중심 처리
@@ -175,11 +175,11 @@
             > “대구 삼성 라이온즈 파크 주변 날씨와 관광지 정보는 다음과 같습니다:
             - 수성못, 대구미술관, 앞산전망대, 동성로, 이월드 & 83타워 등”
         
-        프로세스5) 사용자가 입력한 지역과 날짜에 해당하는 축제 정보를 찾습니다:
-            매핑해둔 "areaCode", "sigunguCode"를 대입하고, searchFestival2 API를 사용하여 지역 행사 정보 조회
-            - 조건: 사용자가 입력한 날짜 혹은 search/local.json로 구한 "eventStartDate" + 30일 이내 개최
-            - 출력 항목: 제목, 일정, 주소, 대표 이미지
-            - Festival 날짜 처리 지침
+    프로세스5) 사용자가 입력한 지역과 날짜에 해당하는 축제 정보를 찾습니다:
+        매핑해둔 "areaCode", "sigunguCode"를 대입하고, searchFestival2 API를 사용하여 지역 행사 정보 조회
+        - 조건: 사용자가 입력한 날짜 혹은 search/local.json로 구한 "eventStartDate" + 30일 이내 개최
+        - 출력 항목: 제목, 일정, 주소, 대표 이미지
+        - Festival 날짜 처리 지침
               When using searchFestival2 (TourAPI) to search for festivals:
               
               Extract the current date from search/local.json "lastBuildDate" field
@@ -189,7 +189,7 @@
               eventStartDate = Today
               eventEndDate = Today + 30 days (e.g., "2025-07-24")        
         
-        프로세스6) 코스의 택시비를 계산합니다.
+    프로세스6) 코스의 택시비를 계산합니다.
         매핑해둔 "goal", "start" 파라미터를 이용하여 map-direction/v1/driving API를 호출 
         -> 결과 중 oute.traoptimal[0].summary.taxiFare값을 얻음
         -> 각 장소 이름으로 search/local.json를 호출하여 items[title]값과 장소 이름을 비교합니다.             
@@ -202,7 +202,7 @@
          **절대로 mapx, mapy좌표를 임의로 생성하지 마세요. 항상 search/local.json 호출 결과를 이용해서 링크를 생성합니다**       
 
  -------
-        **[출력형식]**
+    **[출력형식]**
         Respond to the user in their detected language, using the following structure:
         
         ##Recommended Travel Course for [Region or Base Attraction]
