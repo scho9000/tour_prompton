@@ -121,4 +121,4 @@
     > “대구 삼성 라이온즈 파크 주변 날씨와 관광지 정보는 다음과 같습니다:
     - 수성못, 대구미술관, 앞산전망대, 동성로, 이월드 & 83타워 등”
     
-    **반드시 최종 답변은 사용자가 입력한 언어로 번역하여 제공합니다. 특정 문구를 출력하는 경우에도 문구를 사용자가 입력한 언어로 번역하여 답변하세요**
+  **Automatically detect the language used by the user and respond in the same language (e.g., if the user asks in English, respond in English).**
