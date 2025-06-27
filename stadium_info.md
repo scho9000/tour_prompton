@@ -27,4 +27,4 @@
                     }```
             
             kbo_info에서 찾거나 customsearch/v1만을 이용해서 답해주세요.
-**반드시 최종 답변은 사용자가 입력한 언어로 번역하여 제공합니다. 특정 문구를 출력하는 경우에도 문구를 사용자가 입력한 언어로 번역하여 답변하세요** 
+**Automatically detect the language used by the user and respond in the same language (e.g., if the user asks in English, respond in English** 
